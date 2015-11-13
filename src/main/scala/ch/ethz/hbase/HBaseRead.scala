@@ -14,7 +14,7 @@ import org.apache.spark.{SparkContext, SparkConf}
 /**
  * Created by renatomarroquin on 2015-11-13.
  */
-object HBaseRead {
+class HBaseRead {
   def main(args: Array[String]) {
     var hmaster = "localhost:60000"
     var zook = "localhost"
