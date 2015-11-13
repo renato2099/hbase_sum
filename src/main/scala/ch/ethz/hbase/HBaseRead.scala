@@ -14,16 +14,17 @@ import org.apache.spark.{SparkContext, SparkConf}
 /**
  * Created by renatomarroquin on 2015-11-13.
  */
-class HBaseRead {
+object HBaseRead {
   def main(args: Array[String]) {
-    var hmaster = "localhost:60000"
-    var zook = "localhost"
+    var hmaster = "euler08"
+    var zook = "euler08"
     var count = "false"
     if (args.length != 3)
       throw new RuntimeException("Not enough parameters")
 
     hmaster = args(0);
     zook = args(1);
+    count = args(2);
     val sparkConf = new SparkConf().setAppName("HBaseRead")
     val sc = new SparkContext(sparkConf)
 
@@ -33,7 +34,7 @@ class HBaseRead {
     conf.setInt("timeout", 120000)
     conf.set("hbase.zookeeper.quorum", zook)
     conf.set("hbase.zookeeper.property.clientPort", "2181")
-    conf.set("zookeeper.znode.parent", "/hbase-unsecure")
+//    conf.set("zookeeper.znode.parent", "/hbase-unsecure")
 
     conf.set(TableInputFormat.INPUT_TABLE, tableName)
 
