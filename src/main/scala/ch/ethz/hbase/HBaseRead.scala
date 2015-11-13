@@ -55,14 +55,12 @@ object HBaseRead {
     else {
       var totSum: Double = 0.0
       val t0 = System.nanoTime()
-      val hBaseData = hBaseRDD.map(t=>t._2)
+      val hBaseData = hBaseRDD.map(t => t._2)
         .map(res =>res.getColumnLatestCell("employees".getBytes(), "s".getBytes()))
-        .map(c=>c.getValueArray())
-        .map(a=> {
-        val tmpDouble = 0.0
-        ByteBuffer.wrap(a).putDouble(tmpDouble)
-        totSum += tmpDouble
-      })
+        .map(c => c.getValueArray())
+        .map(a => {
+          totSum += ByteBuffer.wrap(a).getDouble
+        })
       val hbaseCol = hBaseData.collect()
       val t1 = System.nanoTime()
       println("Elapsed time: " + (t1 - t0)/1000000 + " ms")
