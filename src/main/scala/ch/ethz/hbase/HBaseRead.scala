@@ -63,10 +63,11 @@ object HBaseRead {
         ByteBuffer.wrap(a).putDouble(tmpDouble)
         totSum += tmpDouble
       })
-      hBaseData.collect()
+      val hbaseCol = hBaseData.collect()
       val t1 = System.nanoTime()
       println("Elapsed time: " + (t1 - t0)/1000000 + " ms")
-      hBaseData.foreach(println)
+      println("Total sum" + totSum)
+//      hBaseData.foreach(println)
     }
     sc.stop()
   }
