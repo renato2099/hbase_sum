@@ -24,7 +24,7 @@ object HBaseRead {
 
     hmaster = args(0);
     zook = args(1);
-    val sparkConf = new SparkConf().setAppName("HBaseRead").setMaster("local[2]")
+    val sparkConf = new SparkConf().setAppName("HBaseRead")
     val sc = new SparkContext(sparkConf)
 
     var conf: Configuration = HBaseConfiguration.create
