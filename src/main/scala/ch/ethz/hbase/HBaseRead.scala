@@ -57,13 +57,12 @@ object HBaseRead {
       val t0 = System.nanoTime()
       val hBaseData = hBaseRDD.map(t => t._2)
         .map(res => {
-        val cell = res.getColumnLatestCell("employees".getBytes(), "s".getBytes())
-        totSum += ByteBuffer.wrap(cell.getValue).getDouble
+        res.getColumnLatestCell("employees".getBytes(), "s".getBytes())
       })
-//        .map(c => c.getValueArray())
-//        .map(a => {
-//          totSum += ByteBuffer.wrap(a).getDouble
-//        })
+        .map(c => c.getValueArray())
+        .map(a => {
+          totSum += ByteBuffer.wrap(a).getDouble
+        })
       val hbaseCol = hBaseData.count()
       val t1 = System.nanoTime()
       println("Elapsed time: " + (t1 - t0)/1000000 + " ms")
